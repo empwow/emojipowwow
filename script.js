@@ -1,7 +1,7 @@
 var emojiCounter = {};
 
 document.addEventListener("DOMContentLoaded", function () {
-  var emojis = document.querySelectorAll('symbol[id*="emoji_"]');
+  var emojis = document.querySelectorAll('div#source svg[id*="emoji_"]');
   emojis.forEach(function(el) {
       el.onclick = function() {
         var id = el.id;
@@ -32,7 +32,7 @@ var updateTargetEmoji = function (emojiCounter) {
 
   for (var i = 0; i < topList.length && i < 3; i++) {
     var id = topList[i][0];
-    var emoji = document.querySelector('symbol#' + id);
+    var emoji = document.querySelector('div#source svg#' + id);
     var parts = emoji.dataset.prio.split(" ");
     var canLock = true;
 
