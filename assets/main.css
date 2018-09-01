@@ -9,9 +9,10 @@ div#source svg {
   display: inline;
 }
 
-div#target svg {
+div#target {
   margin: 0 auto;
   width: 30%;
+  display: inline-block;
 }
 
 div.count {

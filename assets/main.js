@@ -25,6 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
 var updateTargetEmoji = function (emojiCounter) {
   var target = document.querySelector('div#target');
   var topList = getToplist(emojiCounter);
+  var total = 0;
+
+  for (var id in emojiCounter) {
+    total += emojiCounter[id];
+  }
+
+  var topPc = total > 0 ? topList[0][1] / total : 0;
 
   var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttributeNS(null, "id", "emoji_build");
@@ -37,22 +44,36 @@ var updateTargetEmoji = function (emojiCounter) {
     eyes: [],
   }
 
-  var partUsed = {};
   var partLocked = {};
 
   for (var i = 0; i < topList.length && i < 3; i++) {
     var id = topList[i][0];
     var emoji = document.querySelector('div#source svg#' + id);
     var parts = emoji.dataset.prio.split(" ");
-    var canLock = true;
+    var canLock = 1;
+
+    if (i == 0) {
+      if (topList.length == 2) {
+        if (topPc > .6) { canLock++; }
+        if (topPc > .7) { canLock++; }
+      }
+      else if (topList.length == 3) {
+        if (topPc > .5) { canLock++; }
+        if (topPc > .6) { canLock++; }
+      }
+      else if (topList.length > 3) {
+        if (topPc > .4) { canLock++; }
+        if (topPc > .5) { canLock++; }
+      }
+    }
 
     for (var p = 0; p < parts.length; p++) {
       var part = parts[p];
 
       if (!partLocked[part]) {
-        if (canLock) {
+        if (canLock > 0) {
           partLocked[part] = true;
-          canLock = false;
+          canLock--;
         }
 
         clonedParts[part] = [];
