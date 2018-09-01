@@ -1,0 +1,30 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+div#source svg {
+  width: 15%;
+  display: inline;
+}
+
+div#target svg {
+  margin: 0 auto;
+  width: 30%;
+}
+
+div.count {
+  font-size: 3vw;
+  display: inline-block;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

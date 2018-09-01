@@ -2,14 +2,24 @@ var emojiCounter = {};
 
 document.addEventListener("DOMContentLoaded", function () {
   var emojis = document.querySelectorAll('div#source svg[id*="emoji_"]');
-  emojis.forEach(function(el) {
-      el.onclick = function() {
-        var id = el.id;
+  emojis.forEach(function(emoji) {
+      emoji.onclick = function() {
+        var id = emoji.id;
         var count = emojiCounter[id];
         emojiCounter[id] = typeof(count) == "undefined" ? 1 : count + 1;
+        document.querySelector('#' + id + ' + div.count').innerHTML = emojiCounter[id];
         updateTargetEmoji(emojiCounter);
       }
   });
+
+  var target = document.querySelector('div#target');
+  target.onclick = function() {
+    while (target.firstChild) {
+      target.removeChild(target.firstChild);
+      emojiCounter = {};
+      document.querySelectorAll('div.count').forEach(function(el) {el.innerHTML = 0;});
+    }
+  }
 });
 
 var updateTargetEmoji = function (emojiCounter) {
